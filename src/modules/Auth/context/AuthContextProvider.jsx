@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
 import { useEffect, useRef, useState } from "react";
 import { loginService, registerService } from "../services/auth";
+import { useMutation } from "@tanstack/react-query";
 
 const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -104,7 +105,7 @@ const AuthContextProvider = ({ children }) => {
     mutationFn: registerService,
     onSuccess: (res) => {
       console.log("Registered successfully", res);
-      navigate("/app");
+      navigate("/dashboard");
     },
     onError: () => {
       console.log("Register failed");
@@ -118,7 +119,7 @@ const AuthContextProvider = ({ children }) => {
       return;
     }
     const payLoad = {
-      name: name,
+      name: fullName,
       email: email,
       password: password,
       role: "developer",
