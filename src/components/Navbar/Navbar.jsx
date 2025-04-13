@@ -38,13 +38,14 @@ function Navbar() {
           >
             Support Us
           </Link>
-          <Link
-            to="/register"
-            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
-            whilehover={{ scale: 1.05 }}
-          >
-            Sign up
-          </Link>
+       
+            <a
+              href="https://account.wishalpha.com/login?redirect_uri=https://developer.wishalpha.com/"
+              className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              Sign in
+            </a>
+
         </div>
       </nav>
     </>
