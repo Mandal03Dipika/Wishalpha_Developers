@@ -84,7 +84,7 @@ const AuthContextProvider = ({ children }) => {
     mutationFn: loginService,
     onSuccess: (res) => {
       console.log("Logged in successfully", res);
-      navigate("/app");
+      navigate("/");
     },
     onError: () => {
       console.log("Login failed");
@@ -105,7 +105,7 @@ const AuthContextProvider = ({ children }) => {
     mutationFn: registerService,
     onSuccess: (res) => {
       console.log("Registered successfully", res);
-      navigate("/dashboard");
+      navigate("/login");
     },
     onError: () => {
       console.log("Register failed");

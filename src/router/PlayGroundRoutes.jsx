@@ -1,29 +1,34 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import AuthRoutes from "./AuthRoutes";
 import GuestRoutes from "./GuestRoutes";
 
-const PlayGroundRouter = () => {
-  const token = localStorage.getItem("accessToken");
+const PlayGroundRoutes = () => {
+  const [token, setToken] = useState(localStorage.getItem("accessToken"));
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+  
+    if (token) {
+      localStorage.setItem("accessToken", token);
+      setToken(token); 
+  
+      const cleanUrl = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
+  }, []);
+  
 
-  return (
-    <Routes>
-      {token ? (
-        <>
-          <Route path="/*" element={<AuthRoutes />} />
-          <Route path="/login" element={<Navigate to="/profile" replace />} />
-          <Route
-            path="/register"
-            element={<Navigate to="/profile" replace />}
-          />
-        </>
-      ) : (
-        <>
-          <Route path="/*" element={<GuestRoutes />} />
-          <Route path="/profile" element={<Navigate to="/login" replace />} />
-        </>
-      )}
-    </Routes>
-  );
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setToken(localStorage.getItem("accessToken"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  return token ? <AuthRoutes /> : <GuestRoutes />;
 };
 
-export default PlayGroundRouter;
+export default PlayGroundRoutes;
