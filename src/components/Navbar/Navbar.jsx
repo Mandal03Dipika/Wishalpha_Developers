@@ -40,7 +40,8 @@ function Navbar() {
           </Link>
        
             <a
-              href="https://account.wishalpha.com/login?redirect_uri=https://developer.wishalpha.com/"
+                // href="http://account.wishalpha.com/login?redirect_uri=https://developer.wishalpha.com/"
+              href="http://localhost:5174/login?redirect_uri=http://localhost:5173/"
               className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
             >
               Sign in

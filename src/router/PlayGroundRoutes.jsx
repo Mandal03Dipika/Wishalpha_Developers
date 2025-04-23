@@ -5,7 +5,7 @@ import GuestRoutes from "./GuestRoutes";
 const PlayGroundRoutes = () => {
   const [token, setToken] = useState(localStorage.getItem("accessToken"));
 
-  console.log("Initial Access Token from localStorage:", token);
+  console.log(" access Token haha", token);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -16,7 +16,7 @@ const PlayGroundRoutes = () => {
       localStorage.setItem("accessToken", token);
       setToken(token);
 
-      const cleanUrl = window.location.origin + window.location.pathname;
+      const cleanUrl = `${window.location.origin}${window.location.pathname}`;
       console.log("Clean URL:", cleanUrl);
       window.history.replaceState({}, document.title, cleanUrl);
     }
@@ -25,13 +25,15 @@ const PlayGroundRoutes = () => {
   useEffect(() => {
     const handleStorageChange = () => {
       const storedToken = localStorage.getItem("accessToken");
-      console.log("Access Token from localStorage on storage change:", storedToken);
+      console.log("access Token from localStorage :", storedToken);
       setToken(storedToken);
     };
 
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
+
+  console.log(" with token:", token);
 
   return token ? <AuthRoutes /> : <GuestRoutes />;
 };

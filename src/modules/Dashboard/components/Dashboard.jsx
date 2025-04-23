@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   PieChart,
   Pie,
@@ -14,36 +14,49 @@ import {
 import useDashboardContext from "../context/features/useDashboardContext";
 
 function Dashboard() {
+  console.log("Dashboard component here");
+
   const { pieData, COLORS, barData, stats } = useDashboardContext();
+  const navigate = useNavigate();
 
   const handleCreateProject = async () => {
+    console.log("Create Project button clicked");
+
     try {
-      const response = await fetch(
-        "https://gameplatform-api.wishalpha.com/api/project/create",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            developerID: "67f7e959be24e809fa802755", 
-            gameName: "New Game", 
-          }),
-        }
-      );
-
+     
+      const accessToken = localStorage.getItem("accessToken");
+  
+      if (!accessToken) {
+        console.log("no tokennnnnn");
+        return;
+      }
+  
+      console.log("Access Token:", accessToken); 
+      const response = await fetch("https://gameplatform-api.wishalpha.com/api/project/create", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          developerID: "67f7e959be24e809fa802755",
+          gameName: "New Game",
+        }),
+      });
+      
       const data = await response.json();
-
+  
       if (response.ok) {
-        console.log("Project created successfully:", data); 
-        alert(`Project created successfully! Project ID: ${data.data.projectId}`);
+        console.log(`Project created yeeeee! Project ID: ${data.data.projectId}`);
+        navigate("/create-project"); 
       } else {
-        console.log("Failed to create project:", data); 
-        alert(`Failed to create project: ${data.message}`);
+        console.log("Failed to create project:", data);
+        console.log(`failed ${data.message}`);
       }
     } catch (error) {
-      console.error("Error creating project:", error);
-      alert("An error occurred while creating the project.");
+      console.log("Error :", error);
+      console.log("error .");
     }
   };
 
@@ -52,12 +65,16 @@ function Dashboard() {
       <div className="p-6 bg-[url(/images/2.png)] text-white min-h-screen">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold text-blue-400">Dashboard</h1>
-          <Link to="/create-project"
-            onClick={handleCreateProject} 
-            className="px-4 py-2 bg-violet-700 text-white rounded-md hover:bg-violet-800 transition"
-          >
-            Create Project
-          </Link>
+          <button
+   onClick={() => {
+    console.log("Button clicked directly!");
+    handleCreateProject();
+  }}
+  className="px-4 py-2 bg-violet-700 text-white rounded-md hover:bg-violet-800 transition"
+>
+  Create Project
+</button>
+
         </div>
         <div className="grid grid-cols-3 gap-6 mt-6">
           {stats.map((stat, index) => (

@@ -9,6 +9,7 @@ function CreateProject() {
     handleFileChange,
     handleChange,
   } = useProjectContext();
+
   return (
     <>
       <div className="p-6 bg-[url(/images/2.png)] text-white min-h-screen flex flex-col items-center">
@@ -21,7 +22,7 @@ function CreateProject() {
               type="text"
               name="gameName"
               placeholder="Game Name"
-              value={gameData.gameName}
+              value={gameData.file}
               onChange={handleChange}
               className="w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
@@ -86,7 +87,13 @@ function CreateProject() {
               {gameData.uploading ? "Uploading..." : "Submit Game"}
             </button>
             {gameData.uploadStatus && (
-              <p className="text-center mt-2 text-green-400">
+              <p
+                className={`text-center mt-2 ${
+                  gameData.uploadStatus.includes("successfully")
+                    ? "text-green-400"
+                    : "text-red-400"
+                }`}
+              >
                 {gameData.uploadStatus}
               </p>
             )}

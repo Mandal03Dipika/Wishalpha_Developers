@@ -13,6 +13,7 @@ const ProjectContextProvider = ({ children }) => {
     uploadStatus: "",
   });
 
+  
   const handleChange = (e) => {
     setGameData({ ...gameData, [e.target.name]: e.target.value });
   };
@@ -23,15 +24,67 @@ const ProjectContextProvider = ({ children }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setGameData({ ...gameData, uploading: true, uploadStatus: "Uploading..." });
-
-    setTimeout(() => {
+    const accessToken=localStorage.getItem("accessToken")
+    if (!accessToken) {
       setGameData({
         ...gameData,
         uploading: false,
-        uploadStatus: "Upload complete!",
+        uploadStatus: "access token is missing,.",
       });
-    }, 3000);
+      console.error("Access token is missing.");
+    
+      return;
+    }
+
+    if (!gameData.projectFile) {
+      setGameData({ ...gameData, uploadStatus: " select a file to upload." });
+      return;
+    }
+
+    setGameData({ ...gameData, uploading: true, uploadStatus: "Uploading..." });
+
+    try {
+      const formData = new FormData();
+      formData.append("gameName", gameData.gameName);
+      formData.append("genre", gameData.genre);
+      formData.append("thumbnail", gameData.thumbnail);
+      formData.append("description", gameData.description);
+      formData.append("projectFile", gameData.projectFile);
+
+      const response = await fetch("https://gameplatform-api.wishalpha.com/api/project/upload", {
+        method: "POST",
+        headers:{
+          "Authorization":`Bearer ${accessToken}`
+        },
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setGameData({
+          ...gameData,
+          projectId: data.data.projectId,
+          uploading: false,
+          uploadStatus: "Project Uploaded successfully!",
+        });
+        console.log("Upload successful:", data);
+      } else {
+        setGameData({
+          ...gameData,
+          uploading: false,
+          uploadStatus: `Upload failed: ${data.message}`,
+        });
+        console.error("Upload failed:", data);
+      }
+    } catch (error) {
+      setGameData({
+        ...gameData,
+        uploading: false,
+        uploadStatus: " error occurred during upload.",
+      });
+      console.error("Error uploading project:", error);
+    }
   };
 
   return (
