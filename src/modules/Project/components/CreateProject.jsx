@@ -40,7 +40,7 @@ function CreateProject() {
         <h1 className="text-3xl font-bold text-blue-400 flex items-center gap-2">
           <Gamepad size={32} /> Create New Game Project
         </h1>
-        <form onSubmit={handleFormSubmit} className="mt-6 space-y-4">
+        <form onSubmit={handleFormSubmit} className="mt-6 space-y-4" encType="multipart/form-data">
           <input
             type="text"
             name="gameName"

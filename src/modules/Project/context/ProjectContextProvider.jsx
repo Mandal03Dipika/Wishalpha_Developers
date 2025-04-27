@@ -91,18 +91,30 @@ const projectId = localStorage.getItem("projectId");
     if (!gameName || !genre || !description || !projectFile) {
       return alert("Fill all fields and upload a file.");
     }
+  console.log(gameData.projectFile);
   
-    const formData = new FormData();
-    formData.append("file", gameData.projectFile);
-    formData.append("projectName", gameData.gameName);
-    formData.append("genre", gameData.genre);
-    formData.append("description", gameData.description);
-    formData.append("projectID", gameData.projectId);
+  const payload={
+    projectId,
+    gameName,
+    genre,
+    description,
+    projectFile,
+  }
+  console.log(payload)
+
+   const formData = new FormData();
+
+    formData.append("data",payload)
+    formData.forEach((e)=>{
+      console.log(e);
+      
+    })
+    
     // formData.append("projectId", projectId); 
+// console.log(formData);
+    // console.log(formData.values()); 
 
-    console.log([...formData.entries()]);
-
-    mutationUploadProject.mutate(formData);
+    // mutationUploadProject.mutate(formData);
   };
   
   
