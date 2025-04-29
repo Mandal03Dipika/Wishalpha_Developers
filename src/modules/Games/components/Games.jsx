@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import useGamesContext from "../context/features/useGamesContext";
 
 function Games() {
-  const { handlePlay, games, selectedGame } = useGamesContext();
+  const { handlePlay, gameData, selectedGame } = useGamesContext();
 
   return (
     <>
@@ -22,7 +22,7 @@ function Games() {
             ></iframe>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {games.map((game) => (
+              {gameData.data.map((game) => (
                 <div
                   key={game.id}
                   className="p-5 rounded-lg bg-white/10 border border-gray-200 shadow-lg"
