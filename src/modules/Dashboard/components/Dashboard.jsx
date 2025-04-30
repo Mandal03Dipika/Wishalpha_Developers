@@ -21,18 +21,18 @@ import { useState } from "react";
 function Dashboard() {
   const { pieData, COLORS, barData, stats } = useDashboardContext();
   const navigate = useNavigate();
-  const [projectId, setProjectId] = useState(null);
+  const [projectID, setprojectID] = useState(null);
 
   const createProjectMutation = useMutation({
     mutationFn: createProjectService,
     onSuccess: (data) => {
-      const projectId = data.data.projectId;
-      console.log(`Project created successfully! Project ID: ${projectId}`);
-      setProjectId(projectId);
-      localStorage.setItem("projectId", projectId);
+      const projectID = data.data.projectId;
+      console.log(`Project created successfully! Project ID: ${projectID}`);
+      setprojectID(projectID);
+      localStorage.setItem("projectID", projectID);
       
       navigate("/create-project");
-      // navigate(`/create-project?projectId=${projectId}`); 
+      // navigate(`/create-project?projectID=${projectID}`); 
     },
     onError: (error) => {
       console.error("Error creating project:", error.response?.data || error.message);

@@ -13,7 +13,7 @@ function CreateProject() {
 
   
   const validateForm = () => {
-    if (!gameData.gameName || !gameData.genre || !gameData.description || !gameData.projectFile) {
+    if (!gameData.projectName || !gameData.genre || !gameData.description || !gameData.file) {
       alert("Please fill in all required fields and upload a file.");
       return false;
     }
@@ -23,12 +23,12 @@ function CreateProject() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      const projectId = localStorage.getItem("projectId");  
-      if (!projectId) {
+      const projectID = localStorage.getItem("projectID");  
+      if (!projectID) {
         alert("Project ID not found. Please create a new project.");
         return;
       }
-      handleSubmit(e, projectId);
+      handleSubmit(e, projectID);
     }
   };
 
@@ -43,9 +43,9 @@ function CreateProject() {
         <form onSubmit={handleFormSubmit} className="mt-6 space-y-4" encType="multipart/form-data">
           <input
             type="text"
-            name="gameName"
+            name="projectName"
             placeholder="Game Name"
-            value={gameData.gameName} 
+            value={gameData.projectName} 
             onChange={handleChange}
             className="w-full p-3 bg-gray-800 text-white rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
             required
@@ -79,13 +79,13 @@ function CreateProject() {
           <div className="flex items-center justify-between p-4 bg-gray-800 rounded-md border border-gray-700">
             <span className="text-gray-400 flex items-center gap-2">
               <File size={20} />{" "}
-              {gameData.projectFile
-                ? gameData.projectFile.name
+              {gameData.file
+                ? gameData.file.name
                 : "No file chosen"}
             </span>
             <input
               type="file"
-              name="projectFile"
+              name="file"
               onChange={handleFileChange}
               className="hidden"
               id="fileUpload"

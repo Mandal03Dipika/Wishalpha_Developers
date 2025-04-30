@@ -7,29 +7,29 @@ import { createProjectService, uploadProjectService } from "../services/project"
 
 const ProjectContextProvider = ({ children }) => {
   const [gameData, setGameData] = useState({
-    projectId: "",
-    gameName: "",
+    projectID: "",
+    projectName: "",
     genre: "",
     description: "",
-    projectFile: null,
+    file: null,
     uploading: false,
     uploadStatus: "",
   });
 
 //   const location = useLocation();
 // const queryParams = new URLSearchParams(location.search);
-// const projectId = queryParams.get("projectId");
+// const projectID = queryParams.get("projectID");
 
-const projectId = localStorage.getItem("projectId");
+const projectID = localStorage.getItem("projectID");
 
 
 
 
   useEffect(() => {
-    if (projectId) {
-      setGameData((prev) => ({ ...prev, projectId }));
+    if (projectID) {
+      setGameData((prev) => ({ ...prev, projectID }));
     }
-  }, [projectId]);
+  }, [projectID]);
 
   const handleChange = (e) => {
     setGameData({ ...gameData, [e.target.name]: e.target.value });
@@ -38,14 +38,14 @@ const projectId = localStorage.getItem("projectId");
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     console.log("Selected File:", file); 
-    setGameData({ ...gameData, projectFile: file });
+    setGameData({ ...gameData, file: file });
   };
   
   const mutationCreateProject = useMutation({
     mutationFn: createProjectService,
     onSuccess: (res) => {
       console.log("Project created successfully:", res);
-      setGameData((prev) => ({ ...prev, projectId: res.data.projectId }));
+      setGameData((prev) => ({ ...prev, projectID: res.data.projectID }));
     },
     onError: (error) => {
       console.error("Error creating project:", error.response?.data || error.message);
@@ -85,36 +85,50 @@ const projectId = localStorage.getItem("projectId");
     e.preventDefault();
   
 
-    const { projectId, gameName, genre, description, projectFile } = gameData;
+    const { projectID, projectName, genre, description, file } = gameData;
 
-    if (!projectId) return alert("Project ID missing!")
-    if (!gameName || !genre || !description || !projectFile) {
+    if (!projectID) return alert("Project ID missing!")
+    if (!projectName || !genre || !description || !file) {
       return alert("Fill all fields and upload a file.");
     }
-  console.log(gameData.projectFile);
+  console.log(gameData.file);
   
   const payload={
-    projectId,
-    gameName,
+    projectID,
+    projectName,
     genre,
     description,
-    projectFile,
+    file,
   }
   console.log(payload)
 
    const formData = new FormData();
+    
+  formData.append("projectID", String(projectID));
+  formData.append("projectName", String(projectName));
+  formData.append("genre", String(genre));
+  formData.append("description", String(description));
+  formData.append("file", file);
 
-    formData.append("data",payload)
+// formData.append("data", JSON.stringify({ projectID, projectName, genre, description }));
+// formData.append("file", file);
+    console.log(projectID);
+    
+    console.log(formData);
+    
     formData.forEach((e)=>{
       console.log(e);
       
     })
+    for (let [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
     
-    // formData.append("projectId", projectId); 
+    // formData.append("projectID", projectID); 
 // console.log(formData);
     // console.log(formData.values()); 
 
-    // mutationUploadProject.mutate(formData);
+    mutationUploadProject.mutate(formData);
   };
   
   
