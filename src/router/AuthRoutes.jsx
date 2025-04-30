@@ -11,6 +11,7 @@ import { DeveloperProfile, EditProfile } from "../modules/Auth";
 import ProjectContextProvider from "../modules/Project/context/ProjectContextProvider";
 import { CreateProject, Projects } from "../modules/Project";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import MaintenancePage from "@/components/Default/Maintainance";
 
 const queryClient = new QueryClient();
 
@@ -42,7 +43,8 @@ const AuthRoutes = () => {
               }
             />
             <Route path="/developers" element={<Developers />} />
-            <Route path="/setting" element={<Settings />} />
+            <Route path="/setting" element={<MaintenancePage />} />
+            <Route path="/maintainance" element={<MaintenancePage />} />
             <Route
               path="/games"
               element={
@@ -51,7 +53,7 @@ const AuthRoutes = () => {
                 </GamesContextProvider>
               }
             />
-            <Route path="/projects" element={<Projects />} />
+            <Route path="/projects" element={<MaintenancePage />} />
             <Route
               path="/create-project"
               element={

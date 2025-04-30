@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 const GuestRoutes = () => {
   const token = localStorage.getItem("accessToken");
   if (token) {
-    return <Navigate to="/profile" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return (

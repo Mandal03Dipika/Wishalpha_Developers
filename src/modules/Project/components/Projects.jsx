@@ -26,17 +26,52 @@ function Projects() {
       image: "/images/mines.png",
       src: "https://minesweeper.wishalpha.com/",
     },
+    ,
+    {
+      id: 5,
+      name: "MineSweeper",
+      image: "/images/mines.png",
+      src: "https://minesweeper.wishalpha.com/",
+    },
+    ,
+    {
+      id: 6,
+      name: "MineSweeper",
+      image: "/images/mines.png",
+      src: "https://minesweeper.wishalpha.com/",
+    },
+    ,
+    {
+      id: 7,
+      name: "MineSweeper",
+      image: "/images/mines.png",
+      src: "https://minesweeper.wishalpha.com/",
+    },
+    ,
+    {
+      id: 8,
+      name: "MineSweeper",
+      image: "/images/mines.png",
+      src: "https://minesweeper.wishalpha.com/",
+    },
+    ,
+    {
+      id: 9,
+      name: "MineSweeper",
+      image: "/images/mines.png",
+      src: "https://minesweeper.wishalpha.com/",
+    },
   ];
 
   return (
     <>
-      <div className="relative h-screen overflow-hidden">
-        <div
-          id="parallax-bg"
-          className="absolute top-0 left-0 w-full h-full bg-[url(/images/2.png)] bg-cover bg-center bg-fixed"
-        ></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40 z-0"></div>
-        <div className="relative flex flex-col h-full px-4">
+      <div className="relative h-screen">
+      <div
+  id="parallax-bg"
+  className="absolute w-full min-h-screen bg-[url(/images/2.png)] bg-cover bg-center bg-fixed bg-no-repeat"
+>
+  <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40 z-0"></div>
+       <div className="relative flex flex-col h-full px-4">
           <motion.h1
             className="text-4xl md:text-6xl font-bold p-4 mb-6 text-center bg-gradient-to-r from-purple-400 to-gray-200 bg-clip-text text-transparent"
             initial={{ opacity: 0, y: -50 }}
@@ -67,6 +102,7 @@ function Projects() {
               </div>
             ))}
           </div>
+          </div> 
         </div>
       </div>
     </>

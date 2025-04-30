@@ -2,6 +2,9 @@ import axios from "axios";
 
 const axiosClient = axios.create({
   baseURL: "https://gameplatform-api.wishalpha.com/",
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
 axiosClient.interceptors.request.use((config) => {
