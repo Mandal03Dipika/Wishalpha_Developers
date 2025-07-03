@@ -177,7 +177,8 @@ function Navbar() {
               className="px-6 pt-2"
             >
               <a
-                href="http://localhost:5174/login?redirect_uri=http://localhost:5173/"
+               // href="http://account.wishalpha.com/login?redirect_uri=https://developer.wishalpha.com/"
+              href="http://localhost:5174/login?redirect_uri=http://localhost:5173/"
                 className="block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-3 rounded-lg font-semibold text-center"
               >
                 Sign In
