@@ -244,7 +244,7 @@ function Footer() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
             >
-              <span>Powered by cutting-edge technology</span>
+              <span>Powered by wish technology</span>
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}

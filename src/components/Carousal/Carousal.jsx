@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from "fram
 import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from "react"
 import { Play, ChevronDown, Sparkles, Gamepad2, Users, Trophy } from "lucide-react"
+import Waves from "@/cssComps/Waves/Waves"
 
 function Carousal() {
   const containerRef = useRef(null)
@@ -45,21 +46,32 @@ function Carousal() {
     }
   }, [mouseX, mouseY])
 
-  const stats = [
-    { icon: Users, value: "5M+", label: "Active Players" },
-    { icon: Gamepad2, value: "10K+", label: "Games Published" },
-    { icon: Trophy, value: "1M+", label: "Tournaments" },
-  ]
 
   return (
     <div ref={containerRef} className="relative h-screen overflow-hidden">
+           <Waves lineColor="#fff"
+        backgroundColor="rgba(0,0,0,0.0)"
+        waveSpeedX={0.02}
+        waveSpeedY={0.01}
+        waveAmpX={40}
+        waveAmpY={20}
+        friction={0.9}
+        tension={0.01}
+        maxCursorMove={120}
+        xGap={12}
+        yGap={36}
+        className="z-0 absolute"
+      />
+      
+
       {/* Dynamic Background with Parallax */}
       <motion.div
       
-        className="absolute inset-0 bg-cover bg-center bg-fixed"
+        className="relative inset-0 bg-cover bg-center bg-fixed"
         style={{
           backgroundImage: "url('/images/carbg.jpg')",
           filter: "brightness(0.7) contrast(1.2)",
+          opacity:0.4
         }}
       />
 
