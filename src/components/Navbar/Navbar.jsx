@@ -32,8 +32,8 @@ function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "bg-gray-900/95 backdrop-blur-md shadow-2xl border-b border-purple-500/20" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500  ${
+        isScrolled ? "bg-gray-900/95 backdrop-blur-md shadow-2xl border-b border-purple-500/90" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6">
@@ -92,7 +92,8 @@ function Navbar() {
 
             {/* Sign In Button */}
             <motion.a
-              href="http://localhost:5174/login?redirect_uri=http://localhost:5173/"
+            //  href="http://localhost:5174/login?redirect_uri=http://localhost:5173/"
+                       href="http://account.wishalpha.com/login?redirect_uri=https://developer.wishalpha.com/"
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 0 30px rgba(147, 51, 234, 0.4)",
@@ -177,8 +178,8 @@ function Navbar() {
               className="px-6 pt-2"
             >
               <a
-               // href="http://account.wishalpha.com/login?redirect_uri=https://developer.wishalpha.com/"
-              href="http://localhost:5174/login?redirect_uri=http://localhost:5173/"
+               href="http://account.wishalpha.com/login?redirect_uri=https://developer.wishalpha.com/"
+             // href="http://localhost:5174/login?redirect_uri=http://localhost:5173/"
                 className="block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-3 rounded-lg font-semibold text-center"
               >
                 Sign In
