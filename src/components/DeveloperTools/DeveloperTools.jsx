@@ -1,5 +1,3 @@
-"use client"
-
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useState, useRef } from "react"
 import { Code, FileText, Headphones, Zap, Download, Globe, Shield, Cpu } from "lucide-react"

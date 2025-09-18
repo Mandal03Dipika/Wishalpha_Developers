@@ -19,7 +19,12 @@ function Sidebar({ isOpen, setIsOpen }) {
     e.preventDefault();
     const res = await logoutService();
     console.log(res);
-    navigate("/login");
+    // navigate("/login");
+     if (window.location.hostname === "localhost") {
+    window.location.href = "http://localhost:5173";
+  } else {
+    window.location.href = "https://developers.wishalpha.com";
+  }
   };
 
   return (
